@@ -1,14 +1,13 @@
-
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="Full Mobile Test" verbose="1" preserve-order="true" group-by-instances="true">
-<test name="Planeta Kino Tests" preserve-order="true" verbose="1">
-    <groups>
-        <run>
-            <include name="loginGroup"/>
-        </run>
-    </groups>
-    <classes>
-        <class name="planetaK.testCases.LoginTestCases"/>
-    </classes>
-</test>
+<suite name="Full Mobile Test" verbose="1" group-by-instances="true">
+    <test name="Planeta Kino Tests" verbose="1">
+        <groups>
+            <run>
+                <include name="loginGroup"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="planetaK.testCases.LoginTestCases"/>
+        </classes>
+    </test>
 </suite>

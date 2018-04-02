@@ -1,30 +1,28 @@
 package planetaK.pages;
 
-
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
+import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.WithTimeout;
+import org.openqa.selenium.support.PageFactory;
+import planetaK.Tools;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 
-public class LoginPage extends BasePage {
+public class LoginPage {
 
-//    private final AndroidDriver driver;
-//
-//    public LoginPage(AndroidDriver driver) {
-//        this.driver = driver;
-//       // PageFactory.initElements(driver, this);
-//        PageFactory.initElements(new AjaxElementLocatorFactory(driver, 20), this);
-//    }
+    private final AndroidDriver driver;
+
     public LoginPage(AndroidDriver driver) {
-        super(driver);
+        this.driver = driver;
+        PageFactory.initElements(new AppiumFieldDecorator(driver, 5, TimeUnit.SECONDS), this);
     }
 
-    private String email = "echornobai@intersog.com";
-    private String password = "AndroidTest1";
-    private String wrongPassword = "qwe";
+    private final String email = "echornobai@intersog.com";
+    private final String password = "AndroidTest1";
+    private final String wrongPassword = "qwe";
 
     @WithTimeout(time = 20, unit = TimeUnit.SECONDS)
     @AndroidFindBy(id = "button_cabinet_f")
@@ -68,14 +66,12 @@ public class LoginPage extends BasePage {
     private MobileElement upButton;
 
 
-
-
     public void openLoginPage() {
         userProfile.click();
-        waitForElementDisplayed(emailField);
+        Tools.waitForElementDisplayed(emailField);
     }
 
-    private void login (String pwd) {
+    private void login(String pwd) {
         emailField.sendKeys(email);
         passwordField.sendKeys(pwd);
         loginButton.click();
@@ -83,29 +79,25 @@ public class LoginPage extends BasePage {
 
     public void successLogin() {
         login(password);
-        waitForElementDisplayed(backButton);
+        Tools.waitForElementDisplayed(backButton);
         backButton.click();
-        swipeRightToLeft(poster1, poster2);
+        Tools.swipeElems(poster1, poster2);
         movieGallery.get(1).click();
-        waitForElementDisplayed(movieTitle);
+        Tools.waitForElementDisplayed(movieTitle);
         System.out.println(movieTitle.getText());
-        sleep(500);
-
+        // Tools.sleep(500);
     }
 
     public void failureLogin() {
         login(wrongPassword);
-
     }
 
-    public void logout(){
+    public void logout() {
         upButton.click();
         homeButton.click();
         accountButton.click();
         logoutButton.click();
     }
-
-
 
 }
 
