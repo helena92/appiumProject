@@ -12,13 +12,13 @@ public class LoginTestCases extends AppiumTestBase {
 
     private LoginPage loginPage;
 
-    @BeforeClass
+    @BeforeClass(alwaysRun = true)
     protected void initPages() {
         loginPage = new LoginPage(driver);
         System.out.println("Login Page is initialized");
     }
 
-    @BeforeClass()
+    @BeforeClass( groups = {"loginGroup"})
     protected void loginPreparation() {
         loginPage.openLoginPage();
     }
@@ -33,7 +33,7 @@ public class LoginTestCases extends AppiumTestBase {
         loginPage.successLogin();
     }
 
-    @AfterClass(groups = {"OneDriveFilesGroup"})
+    @AfterClass(groups = {"loginGroup"})
     protected void logout() {
         loginPage.logout();
     }
