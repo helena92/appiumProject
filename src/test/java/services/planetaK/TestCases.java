@@ -1,14 +1,13 @@
-package planetaK.testCases;
+package services.planetaK;
 
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import planetaK.AppiumTestBase;
-import planetaK.pages.LoginPage;
+import services.AppiumTestBase;
+import services.planetaK.pages.LoginPage;
 
 
 @Test(groups = "loginGroup")
-public class LoginTestCases extends AppiumTestBase {
+public class TestCases extends AppiumTestBase {
 
     private LoginPage loginPage;
 
@@ -33,9 +32,9 @@ public class LoginTestCases extends AppiumTestBase {
         loginPage.successLogin();
     }
 
-    @AfterClass(groups = {"loginGroup"})
-    protected void logout() {
-        loginPage.logout();
+    @Test(description = "Search Gallery Movies", groups = {"galleryGroup"}, priority = 3)
+    protected void openGalleryMovieTest() {
+        loginPage.openGalleryMovie();
     }
 
 }

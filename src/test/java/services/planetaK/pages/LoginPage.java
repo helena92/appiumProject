@@ -1,4 +1,4 @@
-package planetaK.pages;
+package services.planetaK.pages;
 
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
@@ -6,7 +6,8 @@ import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.WithTimeout;
 import org.openqa.selenium.support.PageFactory;
-import planetaK.Tools;
+import services.Tools;
+import services.planetaK.PlanetaKVars;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -20,15 +21,10 @@ public class LoginPage {
         PageFactory.initElements(new AppiumFieldDecorator(driver, 5, TimeUnit.SECONDS), this);
     }
 
-    private final String email = "echornobai@intersog.com";
-    private final String password = "AndroidTest1";
-    private final String wrongPassword = "qwe";
-
     @WithTimeout(time = 20, unit = TimeUnit.SECONDS)
     @AndroidFindBy(id = "button_cabinet_f")
     private MobileElement userProfile;
 
-    //resource-id
     @AndroidFindBy(id = "email")
     private MobileElement emailField;
 
@@ -72,24 +68,26 @@ public class LoginPage {
     }
 
     private void login(String pwd) {
-        emailField.sendKeys(email);
+        emailField.sendKeys(PlanetaKVars.EMAIL);
         passwordField.sendKeys(pwd);
         loginButton.click();
     }
 
     public void successLogin() {
-        login(password);
+        login(PlanetaKVars.PASSWORD);
         Tools.waitForElementDisplayed(backButton);
+    }
+
+    public void openGalleryMovie() {
         backButton.click();
         Tools.swipeElems(poster1, poster2);
         movieGallery.get(1).click();
         Tools.waitForElementDisplayed(movieTitle);
         System.out.println(movieTitle.getText());
-        // Tools.sleep(500);
     }
 
     public void failureLogin() {
-        login(wrongPassword);
+        login(PlanetaKVars.WRONG_PASS);
     }
 
     public void logout() {
