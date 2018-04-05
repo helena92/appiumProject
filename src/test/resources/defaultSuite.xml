@@ -1,0 +1,15 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Full Mobile Test" verbose="1" group-by-instances="true">
+    <test name="Planeta Kino Tests" verbose="1">
+        <parameter name="appPath" value="bin/planeta.apk"/>
+        <groups>
+            <run>
+                <include name="loginGroup"/>
+                <include name="galleryGroup"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="services.planetaK.TestCases"/>
+        </classes>
+    </test>
+</suite>
